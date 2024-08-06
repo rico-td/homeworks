@@ -1,0 +1,12 @@
+---
+- name: Read and display secret from vault
+  hosts: localhost
+  tasks:
+    - name: Read secret file
+      slurp:
+        src: secret.txt
+      register: secret_file
+
+    - name: Decode and display secret
+      debug:
+        msg: "{{ secret_file.content | b64decode }}"
